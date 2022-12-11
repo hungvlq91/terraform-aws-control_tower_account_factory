@@ -323,7 +323,7 @@ def put_ssm_parameters(session: Session, parameters: Dict[str, str]) -> None:
 
     for key, value in parameters.items():
         response = client.put_parameter(
-            Name=SSM_PARAMETER_PATH + key, Value=value, Type="String", Overwrite=True
+            Name=SSM_PARAMETER_PATH + key, Value=value, Type="SecureString", Overwrite=True
         )
 
 

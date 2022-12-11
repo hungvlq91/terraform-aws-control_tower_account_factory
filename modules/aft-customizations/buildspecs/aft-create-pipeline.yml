@@ -10,12 +10,12 @@ phases:
       # Populate Required Variables
       - DEFAULT_PATH=$(pwd)
       - TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
-      - TF_S3_BUCKET=$(aws ssm get-parameter --name $SSM_TF_S3_BUCKET --query "Parameter.Value" --output text)
+      - TF_S3_BUCKET=$(aws ssm get-parameter --name $SSM_TF_S3_BUCKET --with-decryption --query "Parameter.Value" --output text)
       - TF_S3_KEY=$VENDED_ACCOUNT_ID-customizations-pipeline/terraform.tfstate
-      - TF_BACKEND_REGION=$(aws ssm get-parameter --name $SSM_TF_BACKEND_REGION --query "Parameter.Value" --output text)
-      - TF_KMS_KEY_ID=$(aws ssm get-parameter --name $SSM_TF_KMS_KEY_ID --query "Parameter.Value" --output text)
-      - TF_DDB_TABLE=$(aws ssm get-parameter --name $SSM_TF_DDB_TABLE --query "Parameter.Value" --output text)
-      - TF_VERSION=$(aws ssm get-parameter --name $SSM_TF_VERSION --query "Parameter.Value" --output text)
+      - TF_BACKEND_REGION=$(aws ssm get-parameter --name $SSM_TF_BACKEND_REGION --with-decryption --query "Parameter.Value" --output text)
+      - TF_KMS_KEY_ID=$(aws ssm get-parameter --name $SSM_TF_KMS_KEY_ID --with-decryption --query "Parameter.Value" --output text)
+      - TF_DDB_TABLE=$(aws ssm get-parameter --name $SSM_TF_DDB_TABLE --with-decryption --query "Parameter.Value" --output text)
+      - TF_VERSION=$(aws ssm get-parameter --name $SSM_TF_VERSION --with-decryption --query "Parameter.Value" --output text)
 
 
       # Configure Development SSH Key
@@ -35,8 +35,8 @@ phases:
         fi
 
       # Clone AFT
-      - AWS_MODULE_SOURCE=$(aws ssm get-parameter --name $SSM_AWS_MODULE_SOURCE --query "Parameter.Value" --output text)
-      - AWS_MODULE_GIT_REF=$(aws ssm get-parameter --name $SSM_AWS_MODULE_GIT_REF --query "Parameter.Value" --output text)
+      - AWS_MODULE_SOURCE=$(aws ssm get-parameter --name $SSM_AWS_MODULE_SOURCE --with-decryption --query "Parameter.Value" --output text)
+      - AWS_MODULE_GIT_REF=$(aws ssm get-parameter --name $SSM_AWS_MODULE_GIT_REF --with-decryption --query "Parameter.Value" --output text)
       - git config --global credential.helper '!aws codecommit credential-helper $@'
       - git config --global credential.UseHttpPath true
       - git clone --quiet -b $AWS_MODULE_GIT_REF $AWS_MODULE_SOURCE aws-aft-core-framework

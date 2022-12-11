@@ -62,11 +62,13 @@ resource "aws_codebuild_project" "aft_global_customizations_terraform" {
 resource "aws_cloudwatch_log_group" "aft_global_customizations_api_helpers" {
   name              = "/aws/codebuild/aft-global-customizations-api-helpers"
   retention_in_days = var.cloudwatch_log_group_retention
+  kms_key_id        = var.aft_kms_key_log_arn
 }
 
 resource "aws_cloudwatch_log_group" "aft_global_customizations_terraform" {
   name              = "/aws/codebuild/aft-global-customizations-terraform"
   retention_in_days = var.cloudwatch_log_group_retention
+  kms_key_id        = var.aft_kms_key_log_arn
 }
 
 #####################################################
@@ -129,11 +131,13 @@ resource "aws_codebuild_project" "aft_account_customizations_terraform" {
 resource "aws_cloudwatch_log_group" "aft_account_customizations_api_helpers" {
   name              = "/aws/codebuild/aft-account-customizations-api-helpers"
   retention_in_days = var.cloudwatch_log_group_retention
+  kms_key_id        = var.aft_kms_key_log_arn
 }
 
 resource "aws_cloudwatch_log_group" "aft_account_customizations_terraform" {
   name              = "/aws/codebuild/aft-account-customizations-terraform"
   retention_in_days = var.cloudwatch_log_group_retention
+  kms_key_id        = var.aft_kms_key_log_arn
 }
 
 #####################################################
@@ -244,4 +248,5 @@ resource "aws_codebuild_project" "aft_create_pipeline" {
 resource "aws_cloudwatch_log_group" "aft_create_pipeline" {
   name              = "/aws/codebuild/aft-create-pipeline"
   retention_in_days = var.cloudwatch_log_group_retention
+  kms_key_id        = var.aft_kms_key_log_arn
 }

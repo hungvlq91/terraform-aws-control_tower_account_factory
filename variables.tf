@@ -97,6 +97,32 @@ variable "aft_vpc_endpoints" {
   }
 }
 
+variable "aft_vpc_internet" {
+  type        = bool
+  description = "Flag turning internet on/off for AFT VPC"
+  default     = true
+  validation {
+    condition     = contains([true, false], var.aft_vpc_internet)
+    error_message = "Valid values for var: aft_vpc_internet are (true, false)."
+  }
+}
+
+variable "aft_transit_gateway_vpc_attachment" {
+  type        = bool
+  description = "Flag turning transit gateway attachment on/off for AFT VPC"
+  default     = true
+  validation {
+    condition     = contains([true, false], var.aft_transit_gateway_vpc_attachment)
+    error_message = "Valid values for var: aft_transit_gateway_vpc_attachment are (true, false)."
+  }
+}
+
+variable "aft_transit_gateway_id" {
+  description = "Identifier of EC2 Transit Gateway."
+  default     = null
+  type        = string
+}
+
 variable "global_codebuild_timeout" {
   type        = number
   description = "Codebuild build timeout"

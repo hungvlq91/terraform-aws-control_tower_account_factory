@@ -13,6 +13,10 @@ variable "aft_kms_key_arn" {
   type = string
 }
 
+variable "aft_kms_key_log_arn" {
+  type = string
+}
+
 variable "aft_tf_s3_bucket_ssm_path" {
   type = string
 }

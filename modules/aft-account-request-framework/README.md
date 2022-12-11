@@ -150,4 +150,5 @@ No modules.
 | <a name="output_aftService_aws_iam_user"></a> [aftService\_aws\_iam\_user](#output\_aftService\_aws\_iam\_user) | aftService iam user details |
 | <a name="output_aft_failure_notifications_arn"></a> [aft\_failure\_notifications\_arn](#output\_aft\_failure\_notifications\_arn) | arn of failure\_notifications sns topic |
 | <a name="output_aft_kms_key_arn"></a> [aft\_kms\_key\_arn](#output\_aft\_kms\_key\_arn) | Arn for the AFT CMK Key |
+| <a name="output_aft_key_log_arn"></a> [aft\_kms\_key\_log\_arn](#output\_aft\_kms\_key\_log\_arn) | Arn of the KMS key used to encrypt contents in the Log |
 | <a name="output_aft_notifications_arn"></a> [aft\_notifications\_arn](#output\_aft\_notifications\_arn) | arn of aft notifications sns topic |

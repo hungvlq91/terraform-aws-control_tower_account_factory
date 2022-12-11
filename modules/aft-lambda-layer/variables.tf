@@ -37,6 +37,10 @@ variable "aft_kms_key_arn" {
   type = string
 }
 
+variable "aft_kms_key_log_arn" {
+  type = string
+}
+
 variable "aft_vpc_id" {
   type = string
 }

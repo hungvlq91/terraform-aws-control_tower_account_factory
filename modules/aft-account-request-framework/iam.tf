@@ -45,6 +45,7 @@ resource "aws_iam_role_policy" "aft_account_request_audit_trigger" {
     aws_dynamodb_table_aft-request-audit_name          = aws_dynamodb_table.aft_request_audit.name
     aws_sqs_queue_aft_account_request_arn              = aws_sqs_queue.aft_account_request.arn
     aws_kms_key_aft_arn                                = aws_kms_key.aft.arn
+    aws_kms_key_aft_log_arn                            = aws_kms_key.aft_key_log.arn
   })
 }
 
@@ -76,6 +77,7 @@ resource "aws_iam_role_policy" "aft_account_request_action_trigger" {
     aws_lambda_function_invoke_aft_account_provisioning_framework_arn = aws_lambda_function.aft_invoke_aft_account_provisioning_framework.arn
     aws_sqs_queue_aft_account_request_arn                             = aws_sqs_queue.aft_account_request.arn
     aws_kms_key_aft_arn                                               = aws_kms_key.aft.arn
+    aws_kms_key_aft_log_arn                                           = aws_kms_key.aft_key_log.arn
     aws_dynamodb_table_aft-request_name                               = aws_dynamodb_table.aft_request.name
     aws_dynamodb_table_aft-request-audit_name                         = aws_dynamodb_table.aft_request_audit.name
   })
@@ -105,6 +107,7 @@ resource "aws_iam_role_policy" "aft_controltower_event_logger" {
     aws_sns_topic_aft_notifications_arn                = aws_sns_topic.aft_notifications.arn
     aws_sns_topic_aft_failure_notifications_arn        = aws_sns_topic.aft_failure_notifications.arn
     aws_kms_key_aft_arn                                = aws_kms_key.aft.arn
+    aws_kms_key_aft_log_arn                            = aws_kms_key.aft_key_log.arn
   })
 }
 
@@ -129,6 +132,7 @@ resource "aws_iam_role_policy" "aft_account_request_processor" {
     data_aws_region_aft-management_name                = data.aws_region.aft-management.name
     data_aws_caller_identity_aft-management_account_id = data.aws_caller_identity.aft-management.account_id
     aws_kms_key_aft_arn                                = aws_kms_key.aft.arn
+    aws_kms_key_aft_log_arn                            = aws_kms_key.aft_key_log.arn
     aws_sns_topic_aft_notifications_arn                = aws_sns_topic.aft_notifications.arn
     aws_sns_topic_aft_failure_notifications_arn        = aws_sns_topic.aft_failure_notifications.arn
     aws_sqs_queue_aft_account_request_arn              = aws_sqs_queue.aft_account_request.arn
@@ -162,6 +166,7 @@ resource "aws_iam_role_policy" "aft_invoke_aft_account_provisioning_framework" {
     aws_dynamodb_table_aft-request_name                = aws_dynamodb_table.aft_request.name
     var_aft_account_provisioning_framework_sfn_name    = var.aft_account_provisioning_framework_sfn_name
     aws_kms_key_aft_arn                                = aws_kms_key.aft.arn
+    aws_kms_key_aft_log_arn                            = aws_kms_key.aft_key_log.arn
   })
 }
 

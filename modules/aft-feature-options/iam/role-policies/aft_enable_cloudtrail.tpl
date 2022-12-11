@@ -16,7 +16,8 @@
                "kms:Decrypt"
            ],
            "Resource" : [
-               "${aws_kms_key_aft_arn}"
+               "${aws_kms_key_aft_arn}",
+               "arn:${data_aws_partition_current_partition}:kms:${data_aws_region_current_name}:${data_aws_caller_identity_current_account_id}:alias/aws/ssm"
            ]
          },
       {

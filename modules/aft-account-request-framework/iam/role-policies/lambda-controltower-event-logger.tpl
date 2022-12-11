@@ -36,7 +36,9 @@
       ],
       "Resource" : [
         "${aws_kms_key_aft_arn}",
-        "arn:${data_aws_partition_current_partition}:kms:${data_aws_region_aft-management_name}:${data_aws_caller_identity_aft-management_account_id}:alias/aws/sns"
+        "${aws_kms_key_aft_log_arn}",
+        "arn:${data_aws_partition_current_partition}:kms:${data_aws_region_aft-management_name}:${data_aws_caller_identity_aft-management_account_id}:alias/aws/sns",
+        "arn:${data_aws_partition_current_partition}:kms:${data_aws_region_aft-management_name}:${data_aws_caller_identity_aft-management_account_id}:alias/aws/ssm"
       ]
       }
     ]

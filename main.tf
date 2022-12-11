@@ -18,6 +18,7 @@ module "aft_account_provisioning_framework" {
   aft_failure_sns_topic_arn                        = module.aft_account_request_framework.aft_failure_sns_topic_arn
   aft_common_layer_arn                             = module.aft_lambda_layer.layer_version_arn
   aft_kms_key_arn                                  = module.aft_account_request_framework.aft_kms_key_arn
+  aft_kms_key_log_arn                              = module.aft_account_request_framework.aft_kms_key_log_arn
   aft_vpc_private_subnets                          = module.aft_account_request_framework.aft_vpc_private_subnets
   aft_vpc_default_sg                               = module.aft_account_request_framework.aft_vpc_default_sg
   cloudwatch_log_group_retention                   = var.cloudwatch_log_group_retention
@@ -41,6 +42,9 @@ module "aft_account_request_framework" {
   aft_vpc_public_subnet_01_cidr               = var.aft_vpc_public_subnet_01_cidr
   aft_vpc_public_subnet_02_cidr               = var.aft_vpc_public_subnet_02_cidr
   aft_vpc_endpoints                           = var.aft_vpc_endpoints
+  aft_vpc_internet                            = var.aft_vpc_internet
+  aft_transit_gateway_vpc_attachment          = var.aft_transit_gateway_vpc_attachment
+  aft_transit_gateway_id                      = var.aft_transit_gateway_id
   request_framework_archive_path              = module.packaging.request_framework_archive_path
   request_framework_archive_hash              = module.packaging.request_framework_archive_hash
 }
@@ -72,6 +76,7 @@ module "aft_code_repositories" {
   security_group_ids                              = module.aft_account_request_framework.aft_vpc_default_sg
   subnet_ids                                      = module.aft_account_request_framework.aft_vpc_private_subnets
   aft_key_arn                                     = module.aft_account_request_framework.aft_kms_key_arn
+  aft_kms_key_log_arn                             = module.aft_account_request_framework.aft_kms_key_log_arn
   account_request_repo_branch                     = var.account_request_repo_branch
   account_request_repo_name                       = var.account_request_repo_name
   account_customizations_repo_name                = var.account_customizations_repo_name
@@ -101,6 +106,7 @@ module "aft_customizations" {
   aft_tf_version_ssm_path                           = local.ssm_paths.aft_tf_version_ssm_path
   aft_kms_key_id                                    = module.aft_account_request_framework.aft_kms_key_id
   aft_kms_key_arn                                   = module.aft_account_request_framework.aft_kms_key_arn
+  aft_kms_key_log_arn                               = module.aft_account_request_framework.aft_kms_key_log_arn
   aft_common_layer_arn                              = module.aft_lambda_layer.layer_version_arn
   aft_sns_topic_arn                                 = module.aft_account_request_framework.sns_topic_arn
   aft_failure_sns_topic_arn                         = module.aft_account_request_framework.failure_sns_topic_arn
@@ -134,6 +140,7 @@ module "aft_feature_options" {
   log_archive_bucket_object_expiration_days = local.log_archive_bucket_object_expiration_days
   aft_features_sfn_name                     = local.aft_features_sfn_name
   aft_kms_key_arn                           = module.aft_account_request_framework.aft_kms_key_arn
+  aft_kms_key_log_arn                       = module.aft_account_request_framework.aft_kms_key_log_arn
   aft_common_layer_arn                      = module.aft_lambda_layer.layer_version_arn
   aft_sns_topic_arn                         = module.aft_account_request_framework.sns_topic_arn
   aft_failure_sns_topic_arn                 = module.aft_account_request_framework.failure_sns_topic_arn
@@ -168,6 +175,7 @@ module "aft_lambda_layer" {
   aft_tf_aws_customizations_module_url_ssm_path     = local.ssm_paths.aft_tf_aws_customizations_module_url_ssm_path
   aws_region                                        = var.ct_home_region
   aft_kms_key_arn                                   = module.aft_account_request_framework.aft_kms_key_arn
+  aft_kms_key_log_arn                               = module.aft_account_request_framework.aft_kms_key_log_arn
   aft_vpc_id                                        = module.aft_account_request_framework.aft_vpc_id
   aft_vpc_private_subnets                           = module.aft_account_request_framework.aft_vpc_private_subnets
   aft_vpc_default_sg                                = module.aft_account_request_framework.aft_vpc_default_sg

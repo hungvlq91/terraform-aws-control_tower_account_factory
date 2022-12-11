@@ -8,11 +8,11 @@ phases:
     commands:
       - DEFAULT_PATH=$(pwd)
       - TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
-      - AWS_MODULE_SOURCE=$(aws ssm get-parameter --name "/aft/config/aft-pipeline-code-source/repo-url" --query "Parameter.Value" --output text)
-      - AWS_MODULE_GIT_REF=$(aws ssm get-parameter --name "/aft/config/aft-pipeline-code-source/repo-git-ref" --query "Parameter.Value" --output text)
-      - TF_VERSION=$(aws ssm get-parameter --name "/aft/config/terraform/version" --query "Parameter.Value" --output text)
-      - TF_DISTRIBUTION=$(aws ssm get-parameter --name "/aft/config/terraform/distribution" --query "Parameter.Value" --output text)
-      - CT_MGMT_REGION=$(aws ssm get-parameter --name "/aft/config/ct-management-region" --query "Parameter.Value" --output text)
+      - AWS_MODULE_SOURCE=$(aws ssm get-parameter --name "/aft/config/aft-pipeline-code-source/repo-url" --with-decryption --query "Parameter.Value" --output text)
+      - AWS_MODULE_GIT_REF=$(aws ssm get-parameter --name "/aft/config/aft-pipeline-code-source/repo-git-ref" --with-decryption --query "Parameter.Value" --output text)
+      - TF_VERSION=$(aws ssm get-parameter --name "/aft/config/terraform/version" --with-decryption --query "Parameter.Value" --output text)
+      - TF_DISTRIBUTION=$(aws ssm get-parameter --name "/aft/config/terraform/distribution" --with-decryption --query "Parameter.Value" --output text)
+      - CT_MGMT_REGION=$(aws ssm get-parameter --name "/aft/config/ct-management-region" --with-decryption --query "Parameter.Value" --output text)
       - AFT_MGMT_ACCOUNT=$(aws sts get-caller-identity --query Account --output text)
       - AFT_EXEC_ROLE_ARN=arn:$AWS_PARTITION:iam::$AFT_MGMT_ACCOUNT:role/AWSAFTExecution
       - AFT_ADMIN_ROLE_NAME=$(aws ssm get-parameter --name /aft/resources/iam/aft-administrator-role-name | jq --raw-output ".Parameter.Value")
@@ -40,10 +40,10 @@ phases:
       - pip install jinja2-cli==0.7.0 Jinja2==3.0.1 MarkupSafe==2.0.1 boto3==1.18.56 requests==2.26.0
       - |
         if [ $TF_DISTRIBUTION = "oss" ]; then
-          TF_BACKEND_REGION=$(aws ssm get-parameter --name "/aft/config/oss-backend/primary-region" --query "Parameter.Value" --output text)
-          TF_KMS_KEY_ID=$(aws ssm get-parameter --name "/aft/config/oss-backend/kms-key-id" --query "Parameter.Value" --output text)
-          TF_DDB_TABLE=$(aws ssm get-parameter --name "/aft/config/oss-backend/table-id" --query "Parameter.Value" --output text)
-          TF_S3_BUCKET=$(aws ssm get-parameter --name "/aft/config/oss-backend/bucket-id" --query "Parameter.Value" --output text)
+          TF_BACKEND_REGION=$(aws ssm get-parameter --name "/aft/config/oss-backend/primary-region" --with-decryption --query "Parameter.Value" --output text)
+          TF_KMS_KEY_ID=$(aws ssm get-parameter --name "/aft/config/oss-backend/kms-key-id" --with-decryption --query "Parameter.Value" --output text)
+          TF_DDB_TABLE=$(aws ssm get-parameter --name "/aft/config/oss-backend/table-id" --with-decryption --query "Parameter.Value" --output text)
+          TF_S3_BUCKET=$(aws ssm get-parameter --name "/aft/config/oss-backend/bucket-id" --with-decryption --query "Parameter.Value" --output text)
           TF_S3_KEY=account-request/terraform.tfstate
           cd /tmp
           echo "Installing Terraform"
@@ -60,9 +60,9 @@ phases:
           export AWS_SESSION_TOKEN=$(echo ${JSON} | jq --raw-output ".Credentials[\"SessionToken\"]")
           terraform init
         else
-          TF_ORG_NAME=$(aws ssm get-parameter --name "/aft/config/terraform/org-name" --query "Parameter.Value" --output text)
-          TF_TOKEN=$(aws ssm get-parameter --name "/aft/config/terraform/token" --with-decryption --query "Parameter.Value" --output text)
-          TF_ENDPOINT=$(aws ssm get-parameter --name "/aft/config/terraform/api-endpoint" --query "Parameter.Value" --output text)
+          TF_ORG_NAME=$(aws ssm get-parameter --name "/aft/config/terraform/org-name" --with-decryption --query "Parameter.Value" --output text)
+          TF_TOKEN=$(aws ssm get-parameter --name "/aft/config/terraform/token" --with-decryption --with-decryption --query "Parameter.Value" --output text)
+          TF_ENDPOINT=$(aws ssm get-parameter --name "/aft/config/terraform/api-endpoint" --with-decryption --query "Parameter.Value" --output text)
           TF_WORKSPACE_NAME="ct-aft-account-request"
           TF_CONFIG_PATH="./temp_configuration_file.tar.gz"
           cd $DEFAULT_PATH/terraform

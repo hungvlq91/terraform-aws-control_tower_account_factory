@@ -25,6 +25,7 @@ resource "aws_iam_role_policy" "aft_invoke_aft_account_provisioning_framework_va
     aft_sns_topic_arn                                  = var.aft_sns_topic_arn
     aft_failure_sns_topic_arn                          = var.aft_failure_sns_topic_arn
     aws_kms_key_aft_arn                                = var.aft_kms_key_arn
+    aws_kms_key_aft_log_arn                            = var.aft_kms_key_log_arn
   })
 }
 
@@ -50,6 +51,7 @@ resource "aws_iam_role_policy" "aft_invoke_aft_account_provisioning_framework_ge
     aft_sns_topic_arn                                  = var.aft_sns_topic_arn
     aft_failure_sns_topic_arn                          = var.aft_failure_sns_topic_arn
     aws_kms_key_aft_arn                                = var.aft_kms_key_arn
+    aws_kms_key_aft_log_arn                            = var.aft_kms_key_log_arn
   })
 }
 
@@ -75,6 +77,7 @@ resource "aws_iam_role_policy" "aft_invoke_aft_account_provisioning_framework_cr
     aft_sns_topic_arn                                  = var.aft_sns_topic_arn
     aft_failure_sns_topic_arn                          = var.aft_failure_sns_topic_arn
     aws_kms_key_aft_arn                                = var.aft_kms_key_arn
+    aws_kms_key_aft_log_arn                            = var.aft_kms_key_log_arn
   })
 }
 
@@ -100,6 +103,7 @@ resource "aws_iam_role_policy" "aft_invoke_aft_account_provisioning_framework_ta
     aft_sns_topic_arn                                  = var.aft_sns_topic_arn
     aft_failure_sns_topic_arn                          = var.aft_failure_sns_topic_arn
     aws_kms_key_aft_arn                                = var.aft_kms_key_arn
+    aws_kms_key_aft_log_arn                            = var.aft_kms_key_log_arn
   })
 }
 
@@ -125,6 +129,7 @@ resource "aws_iam_role_policy" "aft_invoke_aft_account_provisioning_framework_pe
     aft_sns_topic_arn                                  = var.aft_sns_topic_arn
     aft_failure_sns_topic_arn                          = var.aft_failure_sns_topic_arn
     aws_kms_key_aft_arn                                = var.aft_kms_key_arn
+    aws_kms_key_aft_log_arn                            = var.aft_kms_key_log_arn
   })
 }
 

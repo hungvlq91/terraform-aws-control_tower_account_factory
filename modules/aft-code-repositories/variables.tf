@@ -57,6 +57,10 @@ variable "aft_key_arn" {
   type = string
 }
 
+variable "aft_kms_key_log_arn" {
+  type = string
+}
+
 variable "account_request_repo_name" {
   type = string
 }

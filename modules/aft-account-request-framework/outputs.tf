@@ -21,6 +21,16 @@ output "aft_kms_key_id" {
   value       = aws_kms_key.aft.id
 }
 
+output "aft_kms_key_log_id" {
+  description = "The ID of the KMS key used to encrypt contents in the Log"
+  value       = aws_kms_key.aft_key_log.id
+}
+
+output "aft_kms_key_log_arn" {
+  description = "The ARN of the KMS key used to encrypt contents in the Log"
+  value       = aws_kms_key.aft_key_log.arn
+}
+
 output "request_action_trigger_function_arn" {
   value = aws_lambda_function.aft_account_request_action_trigger.arn
 }

@@ -56,6 +56,7 @@ resource "aws_iam_role_policy" "account_provisioning_customizations_codebuild_po
     data_aws_region_current_name                             = data.aws_region.current.name
     data_aws_caller_identity_current_account_id              = data.aws_caller_identity.current.account_id
     data_aws_kms_alias_aft_key_target_key_arn                = var.aft_key_arn
+    data_aws_kms_alias_aft_key_log_target_key_arn            = var.aft_kms_key_log_arn
     data_aws_dynamo_account_request_table                    = var.account_request_table_name
   })
 }

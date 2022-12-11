@@ -26,6 +26,7 @@ resource "aws_cloudwatch_log_group" "aft_delete_default_vpc" {
   provider          = aws.aft_management
   name              = "/aws/lambda/${aws_lambda_function.aft_delete_default_vpc.function_name}"
   retention_in_days = var.cloudwatch_log_group_retention
+  kms_key_id        = var.aft_kms_key_log_arn
 }
 
 
@@ -54,6 +55,7 @@ resource "aws_cloudwatch_log_group" "aft_enroll_support" {
   provider          = aws.aft_management
   name              = "/aws/lambda/${aws_lambda_function.aft_enroll_support.function_name}"
   retention_in_days = var.cloudwatch_log_group_retention
+  kms_key_id        = var.aft_kms_key_log_arn
 }
 
 ######## aft_enable_cloudtrail ########
@@ -81,4 +83,5 @@ resource "aws_cloudwatch_log_group" "aft_enable_cloudtrail" {
   provider          = aws.aft_management
   name              = "/aws/lambda/${aws_lambda_function.aft_enable_cloudtrail.function_name}"
   retention_in_days = var.cloudwatch_log_group_retention
+  kms_key_id        = var.aft_kms_key_log_arn
 }

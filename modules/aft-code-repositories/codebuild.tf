@@ -117,8 +117,11 @@ resource "aws_codebuild_project" "account_provisioning_customizations_pipeline" 
 resource "aws_cloudwatch_log_group" "account_request" {
   name              = "/aws/codebuild/ct-aft-account-request"
   retention_in_days = var.log_group_retention
+  kms_key_id        = var.aft_kms_key_log_arn
 }
+
 resource "aws_cloudwatch_log_group" "account_provisioning_customizations" {
   name              = "/aws/codebuild/ct-aft-account-provisioning-customizations"
   retention_in_days = var.log_group_retention
+  kms_key_id        = var.aft_kms_key_log_arn
 }

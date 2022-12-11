@@ -41,6 +41,7 @@ resource "aws_lambda_event_source_mapping" "aft_account_request_audit_trigger" {
 resource "aws_cloudwatch_log_group" "aft_account_request_audit_trigger" {
   name              = "/aws/lambda/${aws_lambda_function.aft_account_request_audit_trigger.function_name}"
   retention_in_days = var.cloudwatch_log_group_retention
+  kms_key_id        = aws_kms_key.aft_key_log.arn
 }
 
 ######## aft_account_request_action_trigger ########
@@ -78,6 +79,7 @@ resource "aws_lambda_event_source_mapping" "aft_account_request_action_trigger" 
 resource "aws_cloudwatch_log_group" "aft_account_request_action_trigger" {
   name              = "/aws/lambda/${aws_lambda_function.aft_account_request_action_trigger.function_name}"
   retention_in_days = var.cloudwatch_log_group_retention
+  kms_key_id        = aws_kms_key.aft_key_log.arn
 }
 
 ######## aft_controltower_event_logger ########
@@ -114,6 +116,7 @@ resource "aws_lambda_permission" "aft_controltower_event_logger" {
 resource "aws_cloudwatch_log_group" "aft_controltower_event_logger" {
   name              = "/aws/lambda/${aws_lambda_function.aft_controltower_event_logger.function_name}"
   retention_in_days = var.cloudwatch_log_group_retention
+  kms_key_id        = aws_kms_key.aft_key_log.arn
 }
 
 ######## aft_account_request_processor ########
@@ -151,6 +154,7 @@ resource "aws_lambda_permission" "aft_account_request_processor" {
 resource "aws_cloudwatch_log_group" "aft_account_request_processor" {
   name              = "/aws/lambda/${aws_lambda_function.aft_account_request_processor.function_name}"
   retention_in_days = var.cloudwatch_log_group_retention
+  kms_key_id        = aws_kms_key.aft_key_log.arn
 }
 
 ######## aft_invoke_aft_account_provisioning_framework ########
@@ -188,4 +192,5 @@ resource "aws_lambda_permission" "aft_invoke_aft_account_provisioning_framework"
 resource "aws_cloudwatch_log_group" "aft_invoke_aft_account_provisioning_framework" {
   name              = "/aws/lambda/${aws_lambda_function.aft_invoke_aft_account_provisioning_framework.function_name}"
   retention_in_days = var.cloudwatch_log_group_retention
+  kms_key_id        = aws_kms_key.aft_key_log.arn
 }

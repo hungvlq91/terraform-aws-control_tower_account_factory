@@ -85,7 +85,11 @@
             "kms:Decrypt",
             "kms:GenerateDataKey"
         ],
-        "Resource": "${data_aws_kms_alias_aft_key_target_key_arn}"
+        "Resource": [
+          "${data_aws_kms_alias_aft_key_target_key_arn}",
+          "${data_aws_kms_alias_aft_key_log_target_key_arn}",
+          "arn:${data_aws_partition_current_partition}:kms:${aws_region}:${account_id}:alias/aws/ssm"
+        ]
     }
   ]
 }

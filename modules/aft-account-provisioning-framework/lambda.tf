@@ -24,6 +24,7 @@ resource "aws_lambda_function" "validate_request" {
 resource "aws_cloudwatch_log_group" "validate_request" {
   name              = "/aws/lambda/${aws_lambda_function.validate_request.function_name}"
   retention_in_days = var.cloudwatch_log_group_retention
+  kms_key_id        = var.aft_kms_key_log_arn
 }
 
 ### GET ACCOUNT INFO FUNCTION
@@ -50,6 +51,7 @@ resource "aws_lambda_function" "get_account_info" {
 resource "aws_cloudwatch_log_group" "get_account_info" {
   name              = "/aws/lambda/${aws_lambda_function.get_account_info.function_name}"
   retention_in_days = var.cloudwatch_log_group_retention
+  kms_key_id        = var.aft_kms_key_log_arn
 }
 
 ###  CREATE ROLE FUNCTION
@@ -75,6 +77,7 @@ resource "aws_lambda_function" "create_role" {
 resource "aws_cloudwatch_log_group" "create_role" {
   name              = "/aws/lambda/${aws_lambda_function.create_role.function_name}"
   retention_in_days = var.cloudwatch_log_group_retention
+  kms_key_id        = var.aft_kms_key_log_arn
 }
 
 
@@ -101,6 +104,7 @@ resource "aws_lambda_function" "tag_account" {
 resource "aws_cloudwatch_log_group" "tag_account" {
   name              = "/aws/lambda/${aws_lambda_function.tag_account.function_name}"
   retention_in_days = var.cloudwatch_log_group_retention
+  kms_key_id        = var.aft_kms_key_log_arn
 }
 
 ###  PERSIST METADATA FUNCTION
@@ -126,6 +130,7 @@ resource "aws_lambda_function" "persist_metadata" {
 resource "aws_cloudwatch_log_group" "persist_metadata" {
   name              = "/aws/lambda/${aws_lambda_function.persist_metadata.function_name}"
   retention_in_days = var.cloudwatch_log_group_retention
+  kms_key_id        = var.aft_kms_key_log_arn
 }
 
 ###  Account Metadata SSM Function
@@ -153,4 +158,5 @@ resource "aws_lambda_function" "account_metadata_ssm" {
 resource "aws_cloudwatch_log_group" "account_metadata_ssm" {
   name              = "/aws/lambda/${aws_lambda_function.account_metadata_ssm.function_name}"
   retention_in_days = var.cloudwatch_log_group_retention
+  kms_key_id        = var.aft_kms_key_log_arn
 }

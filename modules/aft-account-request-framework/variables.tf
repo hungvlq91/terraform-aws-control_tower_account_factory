@@ -41,6 +41,18 @@ variable "aft_vpc_endpoints" {
   type = bool
 }
 
+variable "aft_vpc_internet" {
+  type = bool
+}
+
+variable "aft_transit_gateway_vpc_attachment" {
+  type = bool
+}
+
+variable "aft_transit_gateway_id" {
+  type = string
+}
+
 variable "request_framework_archive_path" {
   type = string
 }
